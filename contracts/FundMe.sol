@@ -3,6 +3,7 @@
 pragma solidity ^0.8.8;
 
 import './PriceConverter.sol';
+import 'hardhat/console.sol';
 
 error FundMe__NotOwner();
 
@@ -51,8 +52,8 @@ contract FundMe {
             msg.value.getConversionRate(priceFeed) >= MINIMUM_USD,
             "Didn't send enough Money!!!!"
         );
-        funders.push(msg.sender);
         addressToAmountFunded[msg.sender] = msg.value;
+        funders.push(msg.sender);
     }
 
     function withdraw() public payable onlyOwner {
